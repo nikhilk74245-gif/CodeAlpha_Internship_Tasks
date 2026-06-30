@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Frame & Field — Photo Gallery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="grain-overlay"></div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <h1 class="logo">Frame <span>&amp;</span> Field</h1>
+    <p class="tagline">A small collection of light, line, and place</p>
+  </div>
+</header>
+
+<nav class="filter-bar" aria-label="Filter gallery by category">
+  <button class="filter-pill is-active" data-filter="all">
+    <span class="pill-index">00</span> All
+  </button>
+  <button class="filter-pill" data-filter="nature">
+    <span class="pill-index">01</span> Nature
+  </button>
+  <button class="filter-pill" data-filter="architecture">
+    <span class="pill-index">02</span> Architecture
+  </button>
+  <button class="filter-pill" data-filter="travel">
+    <span class="pill-index">03</span> Travel
+  </button>
+  <button class="filter-pill" data-filter="wildlife">
+    <span class="pill-index">04</span> Wildlife
+  </button>
+</nav>
+
+<main>
+  <section class="gallery" id="gallery" aria-live="polite">
+    <!-- Gallery items injected by JavaScript -->
+  </section>
+
+  <p class="empty-state" id="emptyState" hidden>No frames in this category yet.</p>
+</main>
+
+<footer class="site-footer">
+  <p>Frame &amp; Field — internship demo project</p>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <div class="lightbox-backdrop" id="lightboxBackdrop"></div>
+
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close viewer">
+    <svg viewBox="0 0 24 24" width="22" height="22"><path d="M5 5L19 19M19 5L5 19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+  </button>
+
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous image">
+    <svg viewBox="0 0 24 24" width="26" height="26"><path d="M15 5L8 12L15 19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+  </button>
+
+  <figure class="lightbox-stage">
+    <div class="lightbox-img-wrap">
+      <img id="lightboxImg" src="" alt="">
+    </div>
+    <figcaption class="lightbox-caption">
+      <span class="lightbox-title" id="lightboxTitle"></span>
+      <span class="lightbox-category" id="lightboxCategory"></span>
+    </figcaption>
+  </figure>
+
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next image">
+    <svg viewBox="0 0 24 24" width="26" height="26"><path d="M9 5L16 12L9 19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+  </button>
+
+  <div class="lightbox-counter">
+    <span id="lightboxCurrent">01</span>
+    <span class="counter-divider">/</span>
+    <span id="lightboxTotal">20</span>
+  </div>
+
+  <div class="filmstrip" id="filmstrip"></div>
+</div>
+
+<script src="gallery-data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
