@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CL-7 — Desk Calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main class="desk">
+  <div class="calculator" id="calculator">
+
+    <div class="brand-plate">
+      <span class="brand-name">CL&#8209;7</span>
+      <span class="brand-sub">arithmetic unit</span>
+    </div>
+
+    <div class="screen" id="screen">
+      <div class="screen-expression" id="expression" aria-hidden="true"></div>
+      <div class="screen-result" id="result">0</div>
+      <div class="screen-pill" id="opIndicator" aria-hidden="true"></div>
+    </div>
+
+    <div class="keys" id="keys">
+      <button class="key key-fn" data-action="clear">AC</button>
+      <button class="key key-fn" data-action="backspace" aria-label="Backspace">⌫</button>
+      <button class="key key-fn" data-action="percent">%</button>
+      <button class="key key-op" data-op="÷" aria-label="Divide">÷</button>
+
+      <button class="key key-num" data-num="7">7</button>
+      <button class="key key-num" data-num="8">8</button>
+      <button class="key key-num" data-num="9">9</button>
+      <button class="key key-op" data-op="×" aria-label="Multiply">×</button>
+
+      <button class="key key-num" data-num="4">4</button>
+      <button class="key key-num" data-num="5">5</button>
+      <button class="key key-num" data-num="6">6</button>
+      <button class="key key-op" data-op="−" aria-label="Subtract">−</button>
+
+      <button class="key key-num" data-num="1">1</button>
+      <button class="key key-num" data-num="2">2</button>
+      <button class="key key-num" data-num="3">3</button>
+      <button class="key key-op" data-op="+" aria-label="Add">+</button>
+
+      <button class="key key-num key-zero" data-num="0">0</button>
+      <button class="key key-num" data-num=".">.</button>
+      <button class="key key-equals" data-action="equals" aria-label="Equals">=</button>
+    </div>
+
+  </div>
+
+  <p class="hint">Type numbers and <kbd>+</kbd> <kbd>−</kbd> <kbd>×</kbd> <kbd>÷</kbd> on your keyboard · <kbd>Enter</kbd> = equals · <kbd>Esc</kbd> = clear</p>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+/* ============================================
+   CL-7 — Design Tokens
+   ============================================ */
+:root {
+  --color-desk: #d8cdb8;
+  --color-body: #ece6d8;
+  --color-body-edge: #cfc4ac;
+  --color-screen: #1f2a1d;
+  --color-screen-glow: #b9ffb0;
+  --color-screen-dim: #6f8f68;
+
+  --color-key-num: #2c2c2e;
+  --color-key-num-text: #f3f1ea;
+  --color-key-fn: #c9bfa9;
+  --color-key-fn-text: #2c2c2e;
+  --color-key-op: #c4541f;
+  --color-key-op-text: #fdf3ea;
+  --color-key-equals: #2f6f63;
+  --color-key-equals-text: #f3f1ea;
+
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  --radius-card: 22px;
+  --radius-key: 14px;
+  --shadow-card: 0 30px 70px rgba(30, 26, 18, 0.35), 0 6px 16px rgba(30,26,18,0.18);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 30% 0%, #e6dcc6 0%, transparent 55%),
+    var(--color-desk);
+  font-family: var(--font-display);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1rem;
+}
+
+.desk {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.001ms !important; }
+}
+
+/* ============================================
+   Calculator body
+   ============================================ */
+.calculator {
+  width: min(360px, 92vw);
+  background: linear-gradient(160deg, var(--color-body), var(--color-body-edge));
+  border-radius: var(--radius-card);
+  padding: 1.4rem 1.3rem 1.6rem;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(255,255,255,0.35);
+}
+
+.brand-plate {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 0 0.3rem 0.7rem;
+  color: #6b6354;
+}
+
+.brand-name {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  color: #46402f;
+}
+
+.brand-sub {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* ============================================
+   Screen
+   ============================================ */
+.screen {
+  position: relative;
+  background: linear-gradient(165deg, #24301f, var(--color-screen));
+  border-radius: 14px;
+  padding: 1.3rem 1.15rem 1rem;
+  margin-bottom: 1.1rem;
+  box-shadow:
+    inset 0 3px 10px rgba(0,0,0,0.55),
+    inset 0 -1px 0 rgba(255,255,255,0.04);
+  overflow: hidden;
+  min-height: 92px;
+}
+
+.screen::after {
+  /* subtle scanline texture for an LCD feel */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(0,0,0,0.07) 0px,
+    rgba(0,0,0,0.07) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+}
+
+.screen-expression {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-screen-dim);
+  min-height: 1.2rem;
+  text-align: right;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.screen-expression::-webkit-scrollbar { display: none; }
+
+.screen-result {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 9vw, 2.5rem);
+  color: var(--color-screen-glow);
+  text-align: right;
+  text-shadow: 0 0 18px rgba(185, 255, 176, 0.35);
+  white-space: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  transition: opacity 0.15s ease;
+}
+.screen-result::-webkit-scrollbar { display: none; }
+
+.screen-result.is-error {
+  color: #ff9d8a;
+  text-shadow: 0 0 18px rgba(255, 157, 138, 0.35);
+}
+
+.screen-pill {
+  position: absolute;
+  top: 0.7rem;
+  left: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-screen-dim);
+  letter-spacing: 0.08em;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.screen-pill.is-visible { opacity: 1; }
+
+/* ============================================
+   Keys
+   ============================================ */
+.keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem;
+}
+
+.key {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  border: none;
+  border-radius: var(--radius-key);
+  padding: 1.05rem 0;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.15s ease;
+}
+
+.key-num {
+  background: var(--color-key-num);
+  color: var(--color-key-num-text);
+  box-shadow: 0 4px 0 #18181a, 0 6px 14px rgba(0,0,0,0.25);
+}
+
+.key-fn {
+  background: var(--color-key-fn);
+  color: var(--color-key-fn-text);
+  box-shadow: 0 4px 0 #aa9f86, 0 6px 14px rgba(0,0,0,0.15);
+  font-size: 1rem;
+}
+
+.key-op {
+  background: var(--color-key-op);
+  color: var(--color-key-op-text);
+  box-shadow: 0 4px 0 #903e15, 0 6px 14px rgba(0,0,0,0.2);
+  font-size: 1.3rem;
+}
+
+.key-equals {
+  background: var(--color-key-equals);
+  color: var(--color-key-equals-text);
+  box-shadow: 0 4px 0 #1e4d44, 0 6px 14px rgba(0,0,0,0.25);
+  font-size: 1.3rem;
+}
+
+.key-zero { grid-column: span 2; }
+
+/* hover: lift + brighten, never on touch devices to avoid sticky hover */
+@media (hover: hover) {
+  .key:hover { filter: brightness(1.08); }
+}
+
+.key:active,
+.key.is-pressed {
+  transform: translateY(3px);
+}
+.key-num:active, .key-num.is-pressed { box-shadow: 0 1px 0 #18181a, 0 2px 6px rgba(0,0,0,0.25); }
+.key-fn:active, .key-fn.is-pressed { box-shadow: 0 1px 0 #aa9f86, 0 2px 6px rgba(0,0,0,0.15); }
+.key-op:active, .key-op.is-pressed { box-shadow: 0 1px 0 #903e15, 0 2px 6px rgba(0,0,0,0.2); }
+.key-equals:active, .key-equals.is-pressed { box-shadow: 0 1px 0 #1e4d44, 0 2px 6px rgba(0,0,0,0.25); }
+
+.key:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.key-op.is-active {
+  outline: 2px solid rgba(255,255,255,0.7);
+  outline-offset: -3px;
+}
+
+/* ============================================
+   Hint / footer
+   ============================================ */
+.hint {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: #6b6354;
+  text-align: center;
+  max-width: 360px;
+  line-height: 1.6;
+}
+
+kbd {
+  font-family: var(--font-mono);
+  background: rgba(70,64,47,0.1);
+  border: 1px solid rgba(70,64,47,0.25);
+  border-radius: 4px;
+  padding: 0.05rem 0.35rem;
+  font-size: 0.68rem;
+}
+
+/* ============================================
+   Small screens
+   ============================================ */
+@media (max-width: 380px) {
+  .calculator { padding: 1.1rem 1rem 1.3rem; }
+  .key { padding: 0.9rem 0; font-size: 1.05rem; }
+}
